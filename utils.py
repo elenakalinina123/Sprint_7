@@ -4,7 +4,7 @@ import string
 import allure
 import requests
 
-from .data import api_link
+from .data import courier_link, courier_login_link, orders_link
 
 
 @allure.step('генерируем случайную строку')
@@ -31,21 +31,22 @@ def generate_courier_data():
 
 @allure.step('регистрируем нового курьера')
 def register_new_courier(data):
-    return requests.post(f'{api_link}/courier', data=data)
+    return requests.post(courier_link, data=data)
 
 
 @allure.step('авторизовываем курьера')
 def login_courier(data):
-    data.pop('firstName', None)
 
-    return requests.post(f'{api_link}/courier/login', data=data)
+    del data['firstName']
+
+    return requests.post(courier_login_link, data=data)
 
 
 @allure.step('создаем новый заказ')
 def create_new_order(order_json):
-    return requests.post(f'{api_link}/orders', json=order_json)
+    return requests.post(orders_link, json=order_json)
 
 
 @allure.step('получаем список заказов')
 def get_order_list():
-    return requests.get(f'{api_link}/orders')
+    return requests.get(orders_link)
