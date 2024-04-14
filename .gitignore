@@ -1,0 +1,11 @@
+#env
+venv/
+.python-version
+
+
+# python
+__pycache__/
+.pytest_cache/
+requirements.txt
+
+.DS_Store
